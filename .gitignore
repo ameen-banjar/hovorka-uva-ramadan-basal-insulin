@@ -1,0 +1,6 @@
+__pycache__/
+*.pyc
+.DS_Store
+# per-patient checkpoint parts (merged into the scan/switching CSVs)
+analysis/out/r4_parts/
+analysis/out/r5_parts/

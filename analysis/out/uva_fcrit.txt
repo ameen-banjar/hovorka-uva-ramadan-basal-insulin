@@ -1,0 +1,33 @@
+UVA/Padova: insulin-dependent uptake capacity Vm0+Vmx*(f-1)*Ib vanishes below f_crit = 1 - Vm0/(Vmx*Ib)
+          Name  f_crit
+adolescent#001   0.186
+adolescent#002  -1.638
+adolescent#003   0.537
+adolescent#004   0.213
+adolescent#005   0.061
+adolescent#006  -0.278
+adolescent#007  -0.657
+adolescent#008  -2.409
+adolescent#009  -0.094
+adolescent#010   0.389
+     adult#001  -0.040
+     adult#002   0.104
+     adult#003   0.058
+     adult#004   0.520
+     adult#005  -1.275
+     adult#006   0.661
+     adult#007   0.667
+     adult#008  -0.358
+     adult#009  -1.444
+     adult#010  -0.284
+     child#001   0.782
+     child#002   0.375
+     child#003   0.263
+     child#004   0.879
+     child#005   0.577
+     child#006   0.295
+     child#007  -0.112
+     child#008   0.057
+     child#009   0.664
+     child#010   0.285
+patients with f_crit >= 0.6: 5  >=0.7: 2  >=0.8: 1

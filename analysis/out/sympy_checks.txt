@@ -1,0 +1,6 @@
+G* from solve == closed form: True
+elasticity == claimed formula: True
+trace(A) = -I*S_ID - I*S_IT - k12
+det(A)   = I**2*S_ID*S_IT
+discriminant - [(x1-x2)^2 + k12^2 + 2 k12 (x1+x2)] = 0
+weighted-l1 column measures (need <0): [-I*S_IT*delta/(delta + 1), -I*S_ID + delta*k12]

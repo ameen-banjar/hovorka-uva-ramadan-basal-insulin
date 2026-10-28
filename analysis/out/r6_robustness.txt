@@ -1,0 +1,27 @@
+(a) Hovorka elasticity over a parameter population (closed form, G* = 7.5 mmol/L)
+    sets: 10000; calibrated: 9832; excluded (F01 >= EGP0): 168
+    eps: min -6028.159, 2.5% -19.58, Q1 -6.464, median -4.395, Q3 -3.32, 97.5% -2.527, max -2.224
+    eps < -1 in 9832/9832; eps < -2 in 9832/9832; eps < -3 in 8320/9832
+    disposal term range 0.000..0.218; EGP term range -6026.159..-0.322
+    UVA/Padova cohort for comparison: eps > -1 in 11/30
+
+(b) Patients with an admissible interval (all nine scenarios, grid resolution) under alternative criteria
+ hypo  TIR_min  Gmax_max  Hovorka_adm  Hovorka_n  Hovorka_100_inside  UVA/Padova_adm  UVA/Padova_n  UVA/Padova_100_inside
+ 70.0     60.0     300.0            0         10                   0              10            30                      3
+ 70.0     60.0     400.0            0         10                   0              16            30                      5
+ 70.0     70.0     300.0            0         10                   0               9            30                      3
+ 70.0     70.0     400.0            0         10                   0              14            30                      5
+ 75.0     60.0     300.0            0         10                   0               7            30                      2
+ 75.0     60.0     400.0            0         10                   0              14            30                      3
+ 75.0     70.0     300.0            0         10                   0               7            30                      2
+ 75.0     70.0     400.0            0         10                   0              13            30                      3
+ 80.0     60.0     300.0            0         10                   0               6            30                      1
+ 80.0     60.0     400.0            0         10                   0              10            30                      2
+ 80.0     70.0     300.0            0         10                   0               6            30                      1
+ 80.0     70.0     400.0            0         10                   0               9            30                      2
+
+(c) Hovorka: contraction bound (basal insulin only) vs computed settling
+    bound exp(-24c): 0.178..0.487
+    cases with at least one day pair above the 1e-5 mg/dL floor: 48/50
+    largest observed end-of-day factor per case: median 0.0024, max 0.0059
+    observed <= bound in 48/48 cases

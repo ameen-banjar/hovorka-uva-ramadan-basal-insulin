@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""MED-05 Supplementary Tables S1-S8 as LaTeX (analysis/out/supplementary_tables.tex)."""
+"""MED-05 Supplementary Tables S1-S9 as LaTeX (out/supplementary_tables.tex)."""
 import sys
 sys.dont_write_bytecode = True
 from pathlib import Path
@@ -44,27 +44,30 @@ rows = [[esc(r.Patient), f(r.eps), f(r.Gstar_90_mgdl, 0), f(r.Gstar_80_mgdl, 0),
          f(r.G_max_zero_insulin_mgdl, 0), f(r.tau_slow_h, 1), f(r.tau_slow_h_at_80, 1), f(r.contraction_rate_per_h, 3)] for r in h.itertuples()]
 parts.append(table("Hovorka: elasticity $\\varepsilon$ at 100\\% basal, fasting equilibrium $G^*$ (mg/dL) at 90/80/60\\% (equilibrium at 100\\% = 135 mg/dL), zero-insulin bound $G_{\\max}$, slow glucose time constant (h) at 100\\% and 80\\% (full glucose block including $d(G)$; at 80\\% the equilibrium is above the renal threshold), and weighted-$\\ell_1$ contraction rate (h$^{-1}$, $\\delta=S_{ID}I/(2k_{12})$).",
                    "tab:S2a", "lrrrrrrrr",
-                   ["Patient", "$\\varepsilon$", "$G^*_{90}$", "$G^*_{80}$", "$G^*_{60}$", "$G_{\\max}$", "$\\tau_{100}$", "$\\tau_{80}$", "Rate"], rows))
+                   ["Patient", "$\\varepsilon$", "$G^*_{90}$ (mg/dL)", "$G^*_{80}$ (mg/dL)", "$G^*_{60}$ (mg/dL)", "$G_{\\max}$ (mg/dL)", "$\\tau_{100}$ (h)", "$\\tau_{80}$ (h)", "Rate (h$^{-1}$)"], rows))
 u = pd.read_csv(OUT / "uva_r1r2.csv")
 import simglucose
 P = pd.read_csv(Path(simglucose.__file__).parent / "params" / "vpatient_params.csv").set_index("Name")
 rows = [[esc(r.Patient), f(r.G_ss_mgdl, 0), f(r.eps), f(r.Gstar_90_mgdl, 0), f(r.Gstar_80_mgdl, 0), f(r.Gstar_60_mgdl, 0),
          f(r.tau_slow_h, 2), f(r.contraction_rate_per_h, 3), f(1 - P.loc[r.Patient, "Vm0"] / (P.loc[r.Patient, "Vmx"] * P.loc[r.Patient, "Ib"]))] for r in u.itertuples()]
-parts.append(table("UVA/Padova: basal equilibrium, elasticity $\\varepsilon$, fasting equilibrium $G^*$ (mg/dL) at 90/80/60\\%, slow glucose time constant (h), $\\ell_1$ contraction rate (h$^{-1}$), and $f_{\\mathrm{crit}}$ (main text, Proposition~1).",
+parts.append(table("UVA/Padova: basal equilibrium, elasticity $\\varepsilon$, fasting equilibrium $G^*$ (mg/dL) at 90/80/60\\%, slow glucose time constant (h), $\\ell_1$ contraction rate (h$^{-1}$), and $f_{\\mathrm{crit}}$ (main text, Proposition~1 of the main text). The equilibria are the roots of the implicit equation of the main text (Proposition on the implicit fasting equilibrium), checked to a relative difference below $10^{-14}$ where $f\\ge f_{\\mathrm{crit}}$.",
                    "tab:S2b", "lrrrrrrrr",
-                   ["Patient", "$G^*_{100}$", "$\\varepsilon$", "$G^*_{90}$", "$G^*_{80}$", "$G^*_{60}$", "$\\tau$", "Rate", "$f_{\\mathrm{crit}}$"], rows, size=r"\scriptsize"))
+                   ["Patient", "$G^*_{100}$ (mg/dL)", "$\\varepsilon$", "$G^*_{90}$ (mg/dL)", "$G^*_{80}$ (mg/dL)", "$G^*_{60}$ (mg/dL)", "$\\tau$ (h)", "Rate (h$^{-1}$)", "$f_{\\mathrm{crit}}$"], rows, size=r"\scriptsize"))
 
 # S3: Floquet multipliers
 for m, lab, key in (("hovorka", "Hovorka", "S3a"), ("uva", "UVA/Padova", "S3b")):
     d = pd.read_csv(OUT / f"r3_{m}.csv"); d = d[d.policy != "pre"].copy(); d["policy"] = d.policy.astype(float)
-    mu = d.pivot(index="Patient", columns="policy", values="mu1")
+    # Revision 1: |mu1| from r8d (rtol 1e-12, central differences, step 1e-5); below 1e-5 not resolved.
+    q = pd.read_csv(OUT / "r8d_floquet_all.csv"); q = q[(q.model == lab) & (q.policy.astype(str) != "pre")].copy()
+    q["policy"] = q.policy.astype(float)
+    mu = q.pivot(index="Patient", columns="policy", values="mu1")
     tir = d.pivot(index="Patient", columns="policy", values="TIR_per")
     order = [p for p in (["adult#%03d" % i for i in range(1, 11)] if m == "hovorka" else
              [f"{r}#{n:03d}" for r in ("child", "adolescent", "adult") for n in range(1, 11)])]
-    rows = [[esc(p)] + [f"{mu.loc[p, q]:.2e}" for q in (1.0, 0.9, 0.8, 0.7, 0.6)] + [f(tir.loc[p, q], 1) for q in (1.0, 0.9, 0.8, 0.7, 0.6)] for p in order]
-    parts.append(table(f"{lab}: dominant Floquet multiplier $|\\mu_1|$ from a finite-difference monodromy matrix (relative step $10^{{-6}}$; values below about 0.01 are not resolved, see main text) and TIR (\\%) of the deterministic Ramadan periodic orbit, by basal policy.",
+    rows = [[esc(p)] + [("$<10^{-5}$" if mu.loc[p, q] < 1e-5 else f"{mu.loc[p, q]:.1e}") for q in (1.0, 0.9, 0.8, 0.7, 0.6)] + [f(tir.loc[p, q], 1) for q in (1.0, 0.9, 0.8, 0.7, 0.6)] for p in order]
+    parts.append(table(f"{lab}: dominant Floquet multiplier $|\\mu_1|$ from a central-difference monodromy matrix (relative step $10^{{-5}}$) of the periodic orbit computed at relative tolerance $10^{{-12}}$ (Section S3); values below $10^{{-5}}$ are not resolved and are shown as $<10^{{-5}}$. The last five columns give the TIR (\\%) of the deterministic Ramadan periodic orbit, by basal policy.",
                        f"tab:{key}", "lrrrrrrrrrr",
-                       ["Patient"] + [f"$|\\mu_1|$ {int(q*100)}\\%" for q in (1.0, 0.9, 0.8, 0.7, 0.6)] + [f"TIR {int(q*100)}\\%" for q in (1.0, 0.9, 0.8, 0.7, 0.6)],
+                       ["Patient"] + [f"$|\\mu_1|$ {int(q*100)}\\%" for q in (1.0, 0.9, 0.8, 0.7, 0.6)] + [f"TIR {int(q*100)}\\% (\\%)" for q in (1.0, 0.9, 0.8, 0.7, 0.6)],
                        rows, size=r"\scriptsize"))
 
 # S4: safe intervals
@@ -84,7 +87,7 @@ for r in b.itertuples():
     rows.append([esc(r.model), esc(r.Patient), iv(r), iv(n), iv(c), iv(sv), f(r.Gmin_worst_at_100, 0), f(r.TIR_mean_at_100, 1)])
 parts.append(table("Admissible basal interval $[f_{\\min},f_{\\max}]$ per patient: all nine fixed scenarios (pre-specified criteria; bounds re-solved by bisection to 0.001) and, post hoc, the nominal day, carbohydrate variation only, and sensitivity variation only. Last columns: worst-case minimum glucose (mg/dL) and scenario-mean TIR (\\%) at 100\\% basal.",
                    "tab:S4", "llllllrr",
-                   ["Model", "Patient", "All nine", "Nominal", "Carbs only", "Sens. only", "$G_{\\min}$", "TIR"], rows, size=r"\scriptsize"))
+                   ["Model", "Patient", "All nine", "Nominal", "Carbs only", "Sens. only", "$G_{\\min}$ (mg/dL)", "TIR (\\%)"], rows, size=r"\scriptsize"))
 
 # S7: criteria sensitivity (post hoc)
 C = pd.read_csv(OUT / "r6_criteria_sensitivity.csv")
@@ -92,7 +95,7 @@ rows = [[f(r.hypo, 0), f(r.TIR_min, 0), f(r.Gmax_max, 0), f"{r.Hovorka_adm}/10",
          f"{r.UVA_Padova_adm}/30", str(r.UVA_Padova_100_inside)] for r in C.rename(columns=lambda c: c.replace("/", "_")).itertuples()]
 parts.append(table("Post hoc: number of patients with an admissible fixed basal fraction in 0.50--1.30 across all nine fixed scenarios, under alternative criteria (grid resolution 0.02, no bisection). Pre-specified criteria: 80 mg/dL, 70\\%, 300 mg/dL. 100\\% inside: patients whose interval contains the pre-Ramadan basal rate.",
                    "tab:S7", "rrrrrrr",
-                   ["Min. glucose $\\ge$", "Mean TIR $\\ge$", "Max. glucose $\\le$", "Hovorka adm.", "Hovorka 100\\% inside", "UVA/Padova adm.", "UVA/Padova 100\\% inside"], rows))
+                   ["Min. glucose $\\ge$ (mg/dL)", "Mean TIR $\\ge$ (\\%)", "Max. glucose $\\le$ (mg/dL)", "Hovorka adm.", "Hovorka 100\\% inside", "UVA/Padova adm.", "UVA/Padova 100\\% inside"], rows))
 
 # S8: day-to-day switching (post hoc design fixed before the run)
 W = pd.read_csv(OUT / "r5_switching.csv")
@@ -102,7 +105,36 @@ g = g[g.f_tag == "midpoint"]
 rows = [[esc(r.model), esc(r.Patient), f(r.f, 3), f(r.env_min, 1), f(r.sw_min, 1), f(r.env_max, 1), f(r.sw_max, 1), f(r.env_tir, 1), f(r.sw_tir, 1)] for r in g.itertuples()]
 parts.append(table("Post hoc: day-to-day switching between the nine scenarios at the midpoint of each pre-specified admissible interval. Envelope: the nine fixed-scenario periodic orbits at the same $f$; switching: five 30-day sequences with the scenario drawn independently each day. Glucose in mg/dL, TIR in \\%.",
                    "tab:S8", "llrrrrrrr",
-                   ["Model", "Patient", "$f$", "Env. min", "Switch. min", "Env. max", "Switch. max", "Env. TIR", "Switch. TIR"], rows))
+                   ["Model", "Patient", "$f$", "Env. min (mg/dL)", "Switch. min (mg/dL)", "Env. max (mg/dL)", "Switch. max (mg/dL)", "Env. TIR (\\%)", "Switch. TIR (\\%)"], rows))
+
+# S9: continuous, serially correlated and asymmetric day-to-day variation (post hoc, revision 1)
+V = pd.read_csv(OUT / "r7_correlated_fixed.csv")
+VAR = [("iid", "0 (independent)"), ("ar05", "0.5"), ("ar08", "0.8"), ("ar08_up", "0.8, sensitivity 1.0--1.2")]
+fx = V[V.f_tag == "fixed"].copy()
+fx["short"] = fx.env_Gmin - fx.cv_Gmin; fx["excess"] = fx.cv_Gmax - fx.env_Gmax; fx["dtir"] = fx.cv_TIR - fx.env_TIR
+rows = []
+for model in ("Hovorka", "UVA/Padova"):
+    for v, lab in VAR:
+        x = fx[(fx.model == model) & (fx.variant == v)]
+        sd = x.groupby(["Patient", "f"]).cv_TIR.std().median()
+        rng = x.groupby(["Patient", "f"]).cv_TIR.agg(lambda t: t.max() - t.min()).max()
+        rows.append([esc(model), lab, str(len(x)), str(int((x.short > 1).sum())), f(max(x.short.max(), 0), 1),
+                     f(max(x.excess.max(), 0), 1), f(x.dtir.median(), 1), f(sd, 1), f(rng, 1)])
+parts.append(table("Post hoc: continuous, serially correlated day-to-day variation at $f=1.0$, 0.9 and 0.8 (all patients). The daily factors $c\\in[0.70,1.30]$ and $s\\in[0.80,1.20]$ follow independent latent AR(1) processes with day-to-day correlation $\\rho$, mapped to uniform marginals; the last variant lets sensitivity only rise ($s\\in[1.0,1.2]$). Eight 30-day sequences per variant, the same for all patients. Envelope: the nine fixed-scenario periodic orbits at the same $f$. Below env.: runs whose minimum is more than 1 mg/dL below the envelope minimum. TIR is the 30-day TIR; SD and range are taken over the eight sequences of each patient and $f$.",
+                   "tab:S9a", "llrrrrrrr",
+                   ["Model", "$\\rho$", "Runs", "Below env.", "Max. shortfall (mg/dL)", "Max. excess (mg/dL)", "Median TIR $-$ env. (points)", "Median SD of TIR (points)", "Max. range of TIR (points)"], rows, size=r"\scriptsize"))
+md = V[V.f_tag == "midpoint"].copy()
+md["adm"] = (md.cv_Gmin >= 80) & (md.cv_Gmax <= 300) & (md.cv_TIR >= 70)
+rows = []
+for pid, x in md.groupby("Patient", sort=False):
+    cells = []
+    for v, _ in VAR:
+        y = x[x.variant == v]
+        cells.append(f"{int(y.adm.sum())}/{len(y)} ({f(y.cv_Gmin.min(), 1)}; {f(y.cv_TIR.min(), 1)})")
+    rows.append([esc(pid), f(x.f.iloc[0], 3)] + cells)
+parts.append(table("Post hoc: UVA/Padova patients with an admissible interval, at its midpoint $f$, under the four variants of Table S9a. Each cell: admissible runs out of eight (lowest minimum glucose in mg/dL; lowest 30-day TIR in \\%). Admissible run: minimum $\\ge80$ mg/dL, maximum $\\le300$ mg/dL and 30-day TIR $\\ge70\\%$.",
+                   "tab:S9b", "lrllll",
+                   ["Patient", "$f$", "$\\rho=0$", "$\\rho=0.5$", "$\\rho=0.8$", "$\\rho=0.8$, $s$ rises"], rows, size=r"\scriptsize"))
 
 DST.write_text("% generated by analysis/make_supplementary.py\n" + "\n\n".join(parts) + "\n")
 print("written", DST)

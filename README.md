@@ -1,6 +1,6 @@
 # Equilibrium, contraction and periodic entrainment of two type 1 diabetes models under Ramadan time-restricted feeding — code and outputs
 
-Code and derived outputs for the article *Equilibrium, Contraction, and Periodic Entrainment of Two Type 1 Diabetes Models under Ramadan Time-Restricted Feeding: A Mathematical Analysis of Basal Insulin Reduction* (Ameen Banjar, University of Jeddah; submitted to *Mathematics*, MDPI).
+Code and derived outputs for the article *Equilibrium, Contraction, and Periodic Entrainment of Two Type 1 Diabetes Models under Ramadan Time-Restricted Feeding: A Mathematical Analysis of Basal Insulin Reduction* (Ameen Banjar, University of Jeddah; submitted to *Mathematics*, MDPI). Release v1.1.0 adds the analyses of the first revision (November 2026); v1.0.0 is the code as first submitted.
 
 ## Contents
 
@@ -14,8 +14,12 @@ Code and derived outputs for the article *Equilibrium, Contraction, and Periodic
 | `analysis/r4_safe_basal.py`, `analysis/r4_bounds.py`, `analysis/r4_refine.py` | Continuation scan over the basal rate under 9 fixed scenarios; admissible intervals (pre-specified criteria in the script header) and bisection refinement |
 | `analysis/r5_switching.py` | Post hoc: day-to-day switching between the nine scenarios over 30 days (design fixed in the script header before the run) |
 | `analysis/r6_robustness.py` | Post hoc: Hovorka elasticity over 10,000 parameter sets (closed form); admissible-interval counts under 12 alternative criteria; contraction bound vs computed settling |
+| `analysis/r7_correlated.py`, `analysis/r7b_fix_envelope.py` | Revision 1, post hoc: continuous, serially correlated (AR(1), ρ = 0, 0.5, 0.8) and asymmetric day-to-day variation, 8 sequences per variant, 4,032 runs (article §3.5, Table S9). `r7b` corrects the envelope columns of the first run (see Notes) |
+| `analysis/r8_numerical_accuracy.py`, `analysis/r8d_floquet_all.py` | Revision 1: numerical accuracy study (Supplementary Section S3): Floquet multipliers by three methods, tolerance study of orbits and admissible bounds; all 240 multipliers at rtol 1e-12 with central differences (Tables S4, S5) |
+| `analysis/r9_criteria_every_scenario.py` | Revision 1, post hoc: TIR ≥ 70% required in every scenario; check that each admissible grid set is one interval |
+| `analysis/r10_uva_implicit_equilibrium.py` | Revision 1: implicit scalar equation of the UVA/Padova fasting equilibrium (Proposition 2), checked against the numerical equilibria |
 | `analysis/simglucose_equivalence_check.py`, `analysis/floquet_step_check.py` | Checks: day map vs simglucose stepping; Floquet finite-difference step sensitivity |
-| `analysis/make_figures.py`, `analysis/make_supplementary.py` | Figures 1–4 (`figures/`) and Supplementary Tables S1–S8 (`analysis/out/supplementary_tables.tex`) |
+| `analysis/make_figures.py`, `analysis/make_supplementary.py` | Figures 1–4 (`figures/`) and Supplementary Tables S1–S9 (`analysis/out/supplementary_tables.tex`) |
 | `analysis/out/` | All derived outputs (CSV, text checks) |
 | `figures/` | Figures 1–4 of the article (PDF and PNG) |
 
@@ -57,7 +61,18 @@ python3 analysis/simglucose_equivalence_check.py && python3 analysis/floquet_ste
 python3 analysis/r5_switching.py all && python3 analysis/r6_robustness.py
 ```
 
-7. Figures 1–4 and Supplementary Tables S1–S8:
+7. Revision 1 analyses: correlated variation (about 1.5 h), accuracy study and all multipliers at tight tolerance (about 45 min each on an Apple M1, 3 low-priority workers, resumable), every-scenario criterion and implicit UVA/Padova equilibrium:
+```bash
+python3 analysis/r7_correlated.py all && python3 analysis/r7b_fix_envelope.py
+```
+```bash
+python3 analysis/r8_numerical_accuracy.py all && python3 analysis/r8d_floquet_all.py
+```
+```bash
+python3 analysis/r9_criteria_every_scenario.py && python3 analysis/r10_uva_implicit_equilibrium.py
+```
+
+8. Figures 1–4 and Supplementary Tables S1–S9:
 ```bash
 python3 analysis/make_figures.py && python3 analysis/make_supplementary.py
 ```
@@ -67,7 +82,8 @@ What is reused rather than recomputed: the archived UVA/Padova 30-day run in `da
 ## Notes
 - The Hovorka cohort and protocol derive from the code of the earlier study; an earlier implementation had insulin-action constants 15–110 times too large (article, Remark 1). All results here use the corrected implementation.
 - The UVA/Padova model is used through the open-source `simglucose` package (J. Xie), which is a dependency and is not redistributed here.
-- AI assistance (Claude Code, Anthropic; model Claude Opus 5.5, October 2026) is disclosed in the article (§2.5 and Acknowledgments).
+- Envelope correction (revision 1): the first run of `r7_correlated.py` looked up the fixed-scenario envelope by patient name only, and both cohorts use the names adult#001–#010. The simulated values were not affected. `r7b_fix_envelope.py` re-attaches the envelope by (model, patient, f), drops the Hovorka runs that were made at UVA/Padova interval midpoints, and blanks one per-day count that cannot be recomputed. The script `r7_correlated.py` itself is now fixed, so a fresh run gives the corrected envelope directly; `out/r7_correlated_fixed.csv` is the file used in the article.
+- AI assistance (Claude Code, Anthropic; model Claude Opus 5.5, October and November 2026) is disclosed in the article (§2.5 and Acknowledgments).
 
 ## Citation
 See `CITATION.cff`. Please cite the article and this repository (DOI from Zenodo).

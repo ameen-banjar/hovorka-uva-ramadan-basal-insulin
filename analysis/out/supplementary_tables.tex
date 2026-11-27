@@ -27,7 +27,7 @@ adult\#010 & 92 & 0.60 & 1.22 & 1.08 & 22.88 & 19.8 & 35.5 & 51 \\
 \footnotesize
 \begin{tabular}{lrrrrrrrr}
 \toprule
-Patient & $\varepsilon$ & $G^*_{90}$ & $G^*_{80}$ & $G^*_{60}$ & $G_{\max}$ & $\tau_{100}$ & $\tau_{80}$ & Rate \\
+Patient & $\varepsilon$ & $G^*_{90}$ (mg/dL) & $G^*_{80}$ (mg/dL) & $G^*_{60}$ (mg/dL) & $G_{\max}$ (mg/dL) & $\tau_{100}$ (h) & $\tau_{80}$ (h) & Rate (h$^{-1}$) \\
 \midrule
 adult\#001 & -4.25 & 171 & 187 & 220 & 307 & 22.0 & 5.7 & 0.030 \\
 adult\#002 & -4.21 & 172 & 190 & 228 & 330 & 19.1 & 5.6 & 0.035 \\
@@ -45,11 +45,11 @@ adult\#010 & -4.23 & 178 & 209 & 282 & 506 & 10.3 & 5.0 & 0.072 \\
 
 \begin{table}[H]
 \centering
-\caption{UVA/Padova: basal equilibrium, elasticity $\varepsilon$, fasting equilibrium $G^*$ (mg/dL) at 90/80/60\%, slow glucose time constant (h), $\ell_1$ contraction rate (h$^{-1}$), and $f_{\mathrm{crit}}$ (main text, Proposition~1).}\label{tab:S2b}
+\caption{UVA/Padova: basal equilibrium, elasticity $\varepsilon$, fasting equilibrium $G^*$ (mg/dL) at 90/80/60\%, slow glucose time constant (h), $\ell_1$ contraction rate (h$^{-1}$), and $f_{\mathrm{crit}}$ (main text, Proposition~1 of the main text). The equilibria are the roots of the implicit equation of the main text (Proposition on the implicit fasting equilibrium), checked to a relative difference below $10^{-14}$ where $f\ge f_{\mathrm{crit}}$.}\label{tab:S2b}
 \scriptsize
 \begin{tabular}{lrrrrrrrr}
 \toprule
-Patient & $G^*_{100}$ & $\varepsilon$ & $G^*_{90}$ & $G^*_{80}$ & $G^*_{60}$ & $\tau$ & Rate & $f_{\mathrm{crit}}$ \\
+Patient & $G^*_{100}$ (mg/dL) & $\varepsilon$ & $G^*_{90}$ (mg/dL) & $G^*_{80}$ (mg/dL) & $G^*_{60}$ (mg/dL) & $\tau$ (h) & Rate (h$^{-1}$) & $f_{\mathrm{crit}}$ \\
 \midrule
 adolescent\#001 & 149 & -0.66 & 159 & 170 & 195 & 1.05 & 0.485 & 0.19 \\
 adolescent\#002 & 152 & -0.69 & 163 & 175 & 199 & 2.46 & 0.161 & -1.64 \\
@@ -87,64 +87,64 @@ child\#010 & 136 & -1.38 & 158 & 187 & 272 & 2.40 & 0.214 & 0.29 \\
 
 \begin{table}[H]
 \centering
-\caption{Hovorka: dominant Floquet multiplier $|\mu_1|$ from a finite-difference monodromy matrix (relative step $10^{-6}$; values below about 0.01 are not resolved, see main text) and TIR (\%) of the deterministic Ramadan periodic orbit, by basal policy.}\label{tab:S3a}
+\caption{Hovorka: dominant Floquet multiplier $|\mu_1|$ from a central-difference monodromy matrix (relative step $10^{-5}$) of the periodic orbit computed at relative tolerance $10^{-12}$ (Section S3); values below $10^{-5}$ are not resolved and are shown as $<10^{-5}$. The last five columns give the TIR (\%) of the deterministic Ramadan periodic orbit, by basal policy.}\label{tab:S3a}
 \scriptsize
 \begin{tabular}{lrrrrrrrrrr}
 \toprule
-Patient & $|\mu_1|$ 100\% & $|\mu_1|$ 90\% & $|\mu_1|$ 80\% & $|\mu_1|$ 70\% & $|\mu_1|$ 60\% & TIR 100\% & TIR 90\% & TIR 80\% & TIR 70\% & TIR 60\% \\
+Patient & $|\mu_1|$ 100\% & $|\mu_1|$ 90\% & $|\mu_1|$ 80\% & $|\mu_1|$ 70\% & $|\mu_1|$ 60\% & TIR 100\% (\%) & TIR 90\% (\%) & TIR 80\% (\%) & TIR 70\% (\%) & TIR 60\% (\%) \\
 \midrule
-adult\#001 & 7.08e-03 & 3.08e-03 & 6.22e-03 & 2.78e-03 & 9.31e-03 & 91.2 & 86.6 & 73.6 & 50.6 & 40.0 \\
-adult\#002 & 1.07e-03 & 7.64e-03 & 2.82e-03 & 6.51e-03 & 4.90e-03 & 91.3 & 86.8 & 66.5 & 45.6 & 33.8 \\
-adult\#003 & 7.53e-03 & 7.79e-03 & 1.25e-02 & 2.02e-03 & 4.96e-03 & 91.5 & 86.2 & 60.3 & 40.3 & 21.0 \\
-adult\#004 & 5.80e-03 & 2.17e-03 & 8.76e-03 & 2.97e-03 & 2.82e-03 & 91.5 & 85.2 & 54.5 & 34.8 & 8.3 \\
-adult\#005 & 8.25e-03 & 3.84e-03 & 4.40e-03 & 3.71e-03 & 2.47e-03 & 91.6 & 85.1 & 52.0 & 28.6 & 1.7 \\
-adult\#006 & 7.78e-03 & 3.46e-03 & 4.12e-03 & 1.66e-03 & 5.07e-03 & 91.7 & 84.7 & 49.7 & 22.7 & 0.0 \\
-adult\#007 & 4.82e-03 & 1.05e-02 & 8.02e-03 & 1.99e-03 & 3.18e-03 & 91.8 & 84.7 & 48.5 & 19.0 & 0.0 \\
-adult\#008 & 8.72e-03 & 6.83e-03 & 4.78e-03 & 4.71e-03 & 3.07e-03 & 91.9 & 83.8 & 43.9 & 9.0 & 0.0 \\
-adult\#009 & 9.90e-03 & 2.91e-03 & 6.73e-03 & 3.04e-03 & 6.42e-03 & 91.9 & 82.4 & 35.8 & 0.0 & 0.0 \\
-adult\#010 & 6.12e-03 & 3.49e-03 & 7.33e-03 & 3.25e-03 & 2.60e-03 & 92.0 & 81.5 & 25.3 & 0.0 & 0.0 \\
+adult\#001 & 2.5e-03 & 3.1e-03 & 1.5e-03 & 1.3e-03 & 1.1e-03 & 91.2 & 86.6 & 73.6 & 50.6 & 40.0 \\
+adult\#002 & 3.5e-03 & 4.2e-03 & 1.9e-03 & 1.5e-03 & 1.2e-03 & 91.3 & 86.8 & 66.5 & 45.6 & 33.8 \\
+adult\#003 & 4.1e-03 & 4.3e-03 & 2.0e-03 & 1.3e-03 & 1.3e-03 & 91.5 & 86.2 & 60.3 & 40.3 & 21.0 \\
+adult\#004 & 4.3e-03 & 3.9e-03 & 1.8e-03 & 1.3e-03 & 1.5e-03 & 91.5 & 85.2 & 54.5 & 34.8 & 8.3 \\
+adult\#005 & 4.8e-03 & 4.0e-03 & 1.8e-03 & 1.3e-03 & 1.6e-03 & 91.6 & 85.1 & 52.0 & 28.6 & 1.7 \\
+adult\#006 & 5.0e-03 & 3.8e-03 & 1.7e-03 & 1.3e-03 & 1.8e-03 & 91.7 & 84.7 & 49.7 & 22.7 & 0.0 \\
+adult\#007 & 5.4e-03 & 4.0e-03 & 1.7e-03 & 1.4e-03 & 1.9e-03 & 91.8 & 84.7 & 48.5 & 19.0 & 0.0 \\
+adult\#008 & 5.5e-03 & 3.6e-03 & 1.4e-03 & 1.6e-03 & 2.1e-03 & 91.9 & 83.8 & 43.9 & 9.0 & 0.0 \\
+adult\#009 & 5.4e-03 & 2.9e-03 & 1.4e-03 & 1.7e-03 & 2.3e-03 & 91.9 & 82.4 & 35.8 & 0.0 & 0.0 \\
+adult\#010 & 5.4e-03 & 2.5e-03 & 1.3e-03 & 1.8e-03 & 2.5e-03 & 92.0 & 81.5 & 25.3 & 0.0 & 0.0 \\
 \bottomrule
 \end{tabular}
 \end{table}
 
 \begin{table}[H]
 \centering
-\caption{UVA/Padova: dominant Floquet multiplier $|\mu_1|$ from a finite-difference monodromy matrix (relative step $10^{-6}$; values below about 0.01 are not resolved, see main text) and TIR (\%) of the deterministic Ramadan periodic orbit, by basal policy.}\label{tab:S3b}
+\caption{UVA/Padova: dominant Floquet multiplier $|\mu_1|$ from a central-difference monodromy matrix (relative step $10^{-5}$) of the periodic orbit computed at relative tolerance $10^{-12}$ (Section S3); values below $10^{-5}$ are not resolved and are shown as $<10^{-5}$. The last five columns give the TIR (\%) of the deterministic Ramadan periodic orbit, by basal policy.}\label{tab:S3b}
 \scriptsize
 \begin{tabular}{lrrrrrrrrrr}
 \toprule
-Patient & $|\mu_1|$ 100\% & $|\mu_1|$ 90\% & $|\mu_1|$ 80\% & $|\mu_1|$ 70\% & $|\mu_1|$ 60\% & TIR 100\% & TIR 90\% & TIR 80\% & TIR 70\% & TIR 60\% \\
+Patient & $|\mu_1|$ 100\% & $|\mu_1|$ 90\% & $|\mu_1|$ 80\% & $|\mu_1|$ 70\% & $|\mu_1|$ 60\% & TIR 100\% (\%) & TIR 90\% (\%) & TIR 80\% (\%) & TIR 70\% (\%) & TIR 60\% (\%) \\
 \midrule
-child\#001 & 1.02e-03 & 8.86e-04 & 8.74e-04 & 1.82e-03 & 1.52e-03 & 96.5 & 76.2 & 56.8 & 43.2 & 36.1 \\
-child\#002 & 1.37e-03 & 7.09e-04 & 1.10e-03 & 2.14e-03 & 1.57e-03 & 100.0 & 93.5 & 83.1 & 62.6 & 26.6 \\
-child\#003 & 1.74e-02 & 1.76e-02 & 1.75e-02 & 2.17e-02 & 1.80e-02 & 54.6 & 84.0 & 80.1 & 62.7 & 47.9 \\
-child\#004 & 1.36e-03 & 2.66e-03 & 1.97e-03 & 2.93e-03 & 2.02e-02 & 51.3 & 74.7 & 64.0 & 51.2 & 27.8 \\
-child\#005 & 1.57e-03 & 2.34e-03 & 5.55e-03 & 1.91e-03 & 1.81e-03 & 71.8 & 85.8 & 89.7 & 74.4 & 64.4 \\
-child\#006 & 6.21e-03 & 2.56e-03 & 2.11e-03 & 8.43e-03 & 3.33e-03 & 94.1 & 92.7 & 79.2 & 58.2 & 36.5 \\
-child\#007 & 5.92e-03 & 3.56e-03 & 4.75e-03 & 5.89e-03 & 7.30e-03 & 100.0 & 100.0 & 100.0 & 97.9 & 80.1 \\
-child\#008 & 2.92e-03 & 2.96e-03 & 2.36e-03 & 5.73e-03 & 8.52e-03 & 61.5 & 66.2 & 64.9 & 57.5 & 48.3 \\
-child\#009 & 9.37e-03 & 1.03e-03 & 3.14e-03 & 9.22e-04 & 1.78e-03 & 98.6 & 96.2 & 78.5 & 62.8 & 55.7 \\
-child\#010 & 8.95e-04 & 1.61e-03 & 2.46e-03 & 1.28e-03 & 7.46e-04 & 86.2 & 84.7 & 82.3 & 60.7 & 49.4 \\
-adolescent\#001 & 1.70e-03 & 2.13e-03 & 3.33e-03 & 2.56e-03 & 4.02e-03 & 100.0 & 100.0 & 100.0 & 94.9 & 76.5 \\
-adolescent\#002 & 7.47e-04 & 6.66e-04 & 6.03e-04 & 7.96e-04 & 1.13e-03 & 62.9 & 60.2 & 57.0 & 53.1 & 46.0 \\
-adolescent\#003 & 6.49e-03 & 4.39e-03 & 4.58e-03 & 1.27e-02 & 1.62e-02 & 92.3 & 82.3 & 61.5 & 22.8 & 0.0 \\
-adolescent\#004 & 9.77e-04 & 1.34e-03 & 3.89e-03 & 3.45e-03 & 1.38e-03 & 85.2 & 82.4 & 75.2 & 57.6 & 22.6 \\
-adolescent\#005 & 3.80e-05 & 1.56e-05 & 7.31e-04 & 4.46e-04 & 2.78e-04 & 81.2 & 79.4 & 77.0 & 62.8 & 44.7 \\
-adolescent\#006 & 2.99e-03 & 4.08e-03 & 1.99e-02 & 3.87e-03 & 3.39e-03 & 98.0 & 97.6 & 97.0 & 96.0 & 95.0 \\
-adolescent\#007 & 4.28e-03 & 5.93e-03 & 1.07e-02 & 2.55e-03 & 3.36e-03 & 66.6 & 65.8 & 64.8 & 63.5 & 62.2 \\
-adolescent\#008 & 4.32e-02 & 3.60e-03 & 1.13e-02 & 2.17e-03 & 6.89e-03 & 72.1 & 71.8 & 71.5 & 71.0 & 70.6 \\
-adolescent\#009 & 1.09e-03 & 1.32e-03 & 1.06e-03 & 1.30e-03 & 4.33e-03 & 89.2 & 87.1 & 85.8 & 79.3 & 60.0 \\
-adolescent\#010 & 4.81e-04 & 9.76e-04 & 5.95e-04 & 1.61e-03 & 1.61e-03 & 100.0 & 97.9 & 71.5 & 34.2 & 13.9 \\
-adult\#001 & 2.62e-03 & 2.45e-03 & 5.43e-03 & 4.29e-03 & 2.64e-03 & 77.3 & 87.2 & 81.3 & 75.5 & 69.1 \\
-adult\#002 & 1.56e-02 & 1.58e-02 & 1.65e-02 & 1.45e-02 & 1.48e-02 & 95.7 & 100.0 & 100.0 & 100.0 & 95.9 \\
-adult\#003 & 7.22e-04 & 9.53e-04 & 9.88e-04 & 2.18e-03 & 1.47e-03 & 97.7 & 94.0 & 60.1 & 36.5 & 33.3 \\
-adult\#004 & 1.96e-03 & 2.25e-03 & 8.15e-04 & 3.43e-03 & 3.89e-03 & 94.3 & 90.7 & 62.9 & 48.6 & 29.2 \\
-adult\#005 & 4.68e-03 & 2.87e-03 & 4.44e-03 & 4.77e-03 & 3.64e-03 & 96.2 & 95.3 & 94.6 & 93.8 & 92.6 \\
-adult\#006 & 3.20e-03 & 5.69e-03 & 1.44e-02 & 2.64e-02 & 4.60e-02 & 90.1 & 84.2 & 41.7 & 0.0 & 0.0 \\
-adult\#007 & 2.09e-03 & 1.73e-03 & 4.70e-03 & 1.22e-02 & 3.62e-02 & 100.0 & 86.2 & 46.7 & 0.0 & 0.0 \\
-adult\#008 & 2.05e-03 & 1.17e-03 & 2.16e-03 & 1.59e-03 & 2.04e-03 & 100.0 & 97.8 & 95.6 & 90.1 & 79.0 \\
-adult\#009 & 1.22e-03 & 2.15e-03 & 1.70e-03 & 6.44e-03 & 3.38e-03 & 52.2 & 54.4 & 58.4 & 65.2 & 61.6 \\
-adult\#010 & 2.24e-03 & 7.77e-03 & 7.73e-03 & 1.26e-03 & 1.59e-03 & 90.5 & 89.9 & 89.2 & 88.4 & 85.7 \\
+child\#001 & $<10^{-5}$ & $<10^{-5}$ & $<10^{-5}$ & $<10^{-5}$ & 9.0e-05 & 96.5 & 76.2 & 56.8 & 43.2 & 36.1 \\
+child\#002 & 9.7e-05 & 1.0e-04 & 1.7e-04 & 5.1e-04 & 1.1e-03 & 100.0 & 93.5 & 83.1 & 62.6 & 26.6 \\
+child\#003 & 1.7e-02 & 1.7e-02 & 1.7e-02 & 1.7e-02 & 1.7e-02 & 54.6 & 84.0 & 80.1 & 62.7 & 47.9 \\
+child\#004 & 2.2e-05 & 2.4e-05 & 3.4e-05 & 7.8e-04 & 1.7e-02 & 51.3 & 74.7 & 64.0 & 51.2 & 27.8 \\
+child\#005 & 4.4e-05 & 4.6e-05 & 4.4e-05 & 4.8e-05 & 4.4e-05 & 71.8 & 85.8 & 89.7 & 74.4 & 64.4 \\
+child\#006 & $<10^{-5}$ & $<10^{-5}$ & $<10^{-5}$ & 1.8e-05 & 4.9e-05 & 94.1 & 92.7 & 79.2 & 58.2 & 36.5 \\
+child\#007 & $<10^{-5}$ & $<10^{-5}$ & $<10^{-5}$ & $<10^{-5}$ & $<10^{-5}$ & 100.0 & 100.0 & 100.0 & 97.9 & 80.1 \\
+child\#008 & $<10^{-5}$ & $<10^{-5}$ & $<10^{-5}$ & $<10^{-5}$ & $<10^{-5}$ & 61.5 & 66.2 & 64.9 & 57.5 & 48.3 \\
+child\#009 & $<10^{-5}$ & $<10^{-5}$ & $<10^{-5}$ & $<10^{-5}$ & $<10^{-5}$ & 98.6 & 96.2 & 78.5 & 62.8 & 55.7 \\
+child\#010 & 1.1e-05 & 1.2e-05 & 1.1e-05 & 1.4e-05 & 1.1e-05 & 86.2 & 84.7 & 82.3 & 60.7 & 49.4 \\
+adolescent\#001 & $<10^{-5}$ & $<10^{-5}$ & $<10^{-5}$ & $<10^{-5}$ & $<10^{-5}$ & 100.0 & 100.0 & 100.0 & 94.9 & 76.5 \\
+adolescent\#002 & $<10^{-5}$ & $<10^{-5}$ & 1.5e-05 & 1.1e-05 & 1.6e-05 & 62.9 & 60.2 & 57.0 & 53.1 & 46.0 \\
+adolescent\#003 & 3.8e-04 & 1.0e-03 & 2.1e-03 & 4.5e-03 & 1.1e-02 & 92.3 & 82.3 & 61.5 & 22.8 & 0.0 \\
+adolescent\#004 & 2.2e-04 & 2.3e-04 & 2.4e-04 & 2.7e-04 & 5.6e-04 & 85.2 & 82.4 & 75.2 & 57.6 & 22.6 \\
+adolescent\#005 & $<10^{-5}$ & $<10^{-5}$ & 2.0e-05 & 3.7e-05 & 7.2e-05 & 81.2 & 79.4 & 77.0 & 62.8 & 44.7 \\
+adolescent\#006 & $<10^{-5}$ & $<10^{-5}$ & $<10^{-5}$ & $<10^{-5}$ & $<10^{-5}$ & 98.0 & 97.6 & 97.0 & 96.0 & 95.0 \\
+adolescent\#007 & 2.3e-04 & 2.3e-04 & 2.4e-04 & 2.3e-04 & 2.3e-04 & 66.6 & 65.8 & 64.8 & 63.5 & 62.2 \\
+adolescent\#008 & $<10^{-5}$ & $<10^{-5}$ & $<10^{-5}$ & $<10^{-5}$ & $<10^{-5}$ & 72.1 & 71.8 & 71.5 & 71.0 & 70.6 \\
+adolescent\#009 & 1.7e-05 & 1.4e-05 & 1.3e-05 & 1.2e-05 & 1.4e-05 & 89.2 & 87.1 & 85.8 & 79.3 & 60.0 \\
+adolescent\#010 & $<10^{-5}$ & $<10^{-5}$ & 5.5e-05 & 1.8e-04 & 5.1e-04 & 100.0 & 97.9 & 71.5 & 34.2 & 13.9 \\
+adult\#001 & 1.3e-03 & 1.3e-03 & 1.3e-03 & 1.3e-03 & 1.3e-03 & 77.3 & 87.2 & 81.3 & 75.5 & 69.1 \\
+adult\#002 & 1.5e-02 & 1.5e-02 & 1.5e-02 & 1.5e-02 & 1.5e-02 & 95.7 & 100.0 & 100.0 & 100.0 & 95.9 \\
+adult\#003 & $<10^{-5}$ & $<10^{-5}$ & $<10^{-5}$ & $<10^{-5}$ & $<10^{-5}$ & 97.7 & 94.0 & 60.1 & 36.5 & 33.3 \\
+adult\#004 & $<10^{-5}$ & 1.3e-05 & 5.9e-05 & 2.2e-04 & 7.0e-04 & 94.3 & 90.7 & 62.9 & 48.6 & 29.2 \\
+adult\#005 & $<10^{-5}$ & $<10^{-5}$ & $<10^{-5}$ & 1.1e-05 & 1.6e-05 & 96.2 & 95.3 & 94.6 & 93.8 & 92.6 \\
+adult\#006 & 1.4e-03 & 5.1e-03 & 1.3e-02 & 2.6e-02 & 4.6e-02 & 90.1 & 84.2 & 41.7 & 0.0 & 0.0 \\
+adult\#007 & 3.3e-05 & 3.9e-04 & 2.9e-03 & 1.2e-02 & 3.6e-02 & 100.0 & 86.2 & 46.7 & 0.0 & 0.0 \\
+adult\#008 & 8.8e-04 & 8.8e-04 & 8.7e-04 & 8.7e-04 & 8.6e-04 & 100.0 & 97.8 & 95.6 & 90.1 & 79.0 \\
+adult\#009 & 9.8e-04 & 9.9e-04 & 1.0e-03 & 9.8e-04 & 1.0e-03 & 52.2 & 54.4 & 58.4 & 65.2 & 61.6 \\
+adult\#010 & 1.0e-05 & 1.1e-05 & 1.1e-05 & 1.0e-05 & 1.2e-05 & 90.5 & 89.9 & 89.2 & 88.4 & 85.7 \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -155,7 +155,7 @@ adult\#010 & 2.24e-03 & 7.77e-03 & 7.73e-03 & 1.26e-03 & 1.59e-03 & 90.5 & 89.9 
 \scriptsize
 \begin{tabular}{llllllrr}
 \toprule
-Model & Patient & All nine & Nominal & Carbs only & Sens. only & $G_{\min}$ & TIR \\
+Model & Patient & All nine & Nominal & Carbs only & Sens. only & $G_{\min}$ (mg/dL) & TIR (\%) \\
 \midrule
 Hovorka & adult\#001 & none & [0.83, 1.18] & [0.93, 0.98] & none & 54 & 60.6 \\
 Hovorka & adult\#002 & none & [0.81, 1.17] & [0.89, 1.02] & none & 56 & 60.2 \\
@@ -207,7 +207,7 @@ UVA/Padova & child\#010 & none & [0.88, 1.09] & none & none & 63 & 84.8 \\
 \footnotesize
 \begin{tabular}{rrrrrrr}
 \toprule
-Min. glucose $\ge$ & Mean TIR $\ge$ & Max. glucose $\le$ & Hovorka adm. & Hovorka 100\% inside & UVA/Padova adm. & UVA/Padova 100\% inside \\
+Min. glucose $\ge$ (mg/dL) & Mean TIR $\ge$ (\%) & Max. glucose $\le$ (mg/dL) & Hovorka adm. & Hovorka 100\% inside & UVA/Padova adm. & UVA/Padova 100\% inside \\
 \midrule
 70 & 60 & 300 & 0/10 & 0 & 10/30 & 3 \\
 70 & 60 & 400 & 0/10 & 0 & 16/30 & 5 \\
@@ -231,7 +231,7 @@ Min. glucose $\ge$ & Mean TIR $\ge$ & Max. glucose $\le$ & Hovorka adm. & Hovork
 \footnotesize
 \begin{tabular}{llrrrrrrr}
 \toprule
-Model & Patient & $f$ & Env. min & Switch. min & Env. max & Switch. max & Env. TIR & Switch. TIR \\
+Model & Patient & $f$ & Env. min (mg/dL) & Switch. min (mg/dL) & Env. max (mg/dL) & Switch. max (mg/dL) & Env. TIR (\%) & Switch. TIR (\%) \\
 \midrule
 UVA/Padova & adolescent\#001 & 0.585 & 82.1 & 82.1 & 208.5 & 208.6 & 74.1 & 74.4 \\
 UVA/Padova & adolescent\#006 & 0.900 & 88.1 & 88.1 & 244.0 & 244.0 & 96.4 & 96.5 \\
@@ -239,6 +239,44 @@ UVA/Padova & adolescent\#010 & 0.897 & 84.2 & 79.7 & 226.3 & 226.5 & 74.5 & 80.3
 UVA/Padova & adult\#002 & 0.500 & 80.1 & 80.1 & 225.7 & 233.5 & 78.7 & 82.4 \\
 UVA/Padova & adult\#003 & 0.892 & 82.3 & 82.1 & 238.5 & 238.5 & 80.7 & 82.0 \\
 UVA/Padova & adult\#007 & 0.927 & 86.8 & 86.7 & 239.6 & 240.1 & 91.6 & 91.8 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\centering
+\caption{Post hoc: continuous, serially correlated day-to-day variation at $f=1.0$, 0.9 and 0.8 (all patients). The daily factors $c\in[0.70,1.30]$ and $s\in[0.80,1.20]$ follow independent latent AR(1) processes with day-to-day correlation $\rho$, mapped to uniform marginals; the last variant lets sensitivity only rise ($s\in[1.0,1.2]$). Eight 30-day sequences per variant, the same for all patients. Envelope: the nine fixed-scenario periodic orbits at the same $f$. Below env.: runs whose minimum is more than 1 mg/dL below the envelope minimum. TIR is the 30-day TIR; SD and range are taken over the eight sequences of each patient and $f$.}\label{tab:S9a}
+\scriptsize
+\begin{tabular}{llrrrrrrr}
+\toprule
+Model & $\rho$ & Runs & Below env. & Max. shortfall (mg/dL) & Max. excess (mg/dL) & Median TIR $-$ env. (points) & Median SD of TIR (points) & Max. range of TIR (points) \\
+\midrule
+Hovorka & 0 (independent) & 240 & 0 & 0.0 & 0.0 & 7.4 & 5.0 & 18.8 \\
+Hovorka & 0.5 & 240 & 0 & 0.0 & 0.0 & 6.3 & 7.3 & 24.5 \\
+Hovorka & 0.8 & 240 & 0 & 0.0 & 0.0 & 10.9 & 12.8 & 41.9 \\
+Hovorka & 0.8, sensitivity 1.0--1.2 & 240 & 0 & 0.0 & 0.0 & 33.3 & 1.9 & 22.3 \\
+UVA/Padova & 0 (independent) & 720 & 6 & 2.5 & 6.9 & 2.3 & 1.1 & 11.2 \\
+UVA/Padova & 0.5 & 720 & 8 & 2.6 & 1.9 & 1.9 & 1.8 & 16.9 \\
+UVA/Padova & 0.8 & 720 & 3 & 1.8 & 0.2 & 1.9 & 3.1 & 29.0 \\
+UVA/Padova & 0.8, sensitivity 1.0--1.2 & 720 & 9 & 2.3 & 0.0 & 3.1 & 2.0 & 24.1 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\centering
+\caption{Post hoc: UVA/Padova patients with an admissible interval, at its midpoint $f$, under the four variants of Table S9a. Each cell: admissible runs out of eight (lowest minimum glucose in mg/dL; lowest 30-day TIR in \%). Admissible run: minimum $\ge80$ mg/dL, maximum $\le300$ mg/dL and 30-day TIR $\ge70\%$.}\label{tab:S9b}
+\scriptsize
+\begin{tabular}{lrllll}
+\toprule
+Patient & $f$ & $\rho=0$ & $\rho=0.5$ & $\rho=0.8$ & $\rho=0.8$, $s$ rises \\
+\midrule
+adolescent\#001 & 0.585 & 8/8 (84.2; 74.2) & 8/8 (83.0; 74.1) & 8/8 (83.2; 73.7) & 8/8 (82.7; 75.9) \\
+adolescent\#006 & 0.900 & 8/8 (89.5; 96.7) & 8/8 (89.2; 96.0) & 8/8 (89.4; 95.3) & 8/8 (88.7; 96.7) \\
+adolescent\#010 & 0.897 & 8/8 (83.8; 85.9) & 8/8 (81.9; 81.1) & 8/8 (84.7; 77.2) & 8/8 (83.0; 99.3) \\
+adult\#002 & 0.500 & 8/8 (87.3; 83.8) & 8/8 (82.3; 81.8) & 8/8 (82.6; 78.8) & 8/8 (82.0; 91.3) \\
+adult\#003 & 0.892 & 8/8 (81.0; 85.8) & 8/8 (80.2; 82.7) & 8/8 (80.7; 80.4) & 8/8 (80.2; 94.9) \\
+adult\#007 & 0.927 & 8/8 (89.0; 91.5) & 8/8 (87.5; 90.7) & 8/8 (87.9; 90.2) & 8/8 (87.4; 94.3) \\
 \bottomrule
 \end{tabular}
 \end{table}

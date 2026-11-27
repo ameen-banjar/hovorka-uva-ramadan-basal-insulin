@@ -65,21 +65,26 @@ axs[0].set_ylabel("max over the day of |G - G$_{per}$| (mg/dL)")
 axs[0].legend(loc="upper right", fontsize=7)
 save(fig, "fig2_transitions")
 
-# Figure 3: periodic-orbit TIR vs 30-day simulation TIR (R3)
-fig, ax = plt.subplots(figsize=(3.6, 3.4))
+# Figure 3: periodic-orbit TIR vs 30-day simulation TIR (R3).
+# Revision 1 (Reviewer 4, minor 7): one panel per model; each basal fraction has its own
+# color (one-hue ramp, darker = lower basal, so it also reads in grayscale) and marker.
+F_COL = {1.0: "#b9d3f2", 0.9: "#7fb0e8", 0.8: "#2a78d6", 0.7: "#1b4f91", 0.6: "#0b2447"}
+F_MK = {1.0: "o", 0.9: "s", 0.8: "^", 0.7: "D", 0.6: "v"}
+fig, axs = plt.subplots(1, 2, figsize=(6.6, 3.4), sharey=True)
 sims = {"hovorka": HERE.parent / "results_corrected" / "summary_all_patients_policies.csv",
         "uva": HERE.parent / "data" / "med01_archived_uva_run" / "summary_all_patients_policies.csv"}
-for m, c, lab, mk in (("hovorka", HOV, "Hovorka (filled circles)", "o"), ("uva", UVA, "UVA/Padova (open triangles)", "^")):
+for ax, (m, lab) in zip(axs, (("hovorka", "Hovorka (10 patients)"), ("uva", "UVA/Padova (30 patients)"))):
     d = pd.read_csv(OUT / f"r3_{m}.csv"); d = d[d.policy != "pre"].copy(); d["policy"] = d.policy.astype(float)
     s = pd.read_csv(sims[m]); s = s[s.Period == "Ramadan"]
     j = d.merge(s, left_on=["Patient", "policy"], right_on=["Patient", "Policy"])
-    if mk == "o":
-        ax.scatter(j.TIR, j.TIR_per, s=14, marker=mk, color=c, alpha=0.8, edgecolor=INK, linewidth=0.3, label=lab)
-    else:
-        ax.scatter(j.TIR, j.TIR_per, s=18, marker=mk, facecolor="white", edgecolor=c, linewidth=0.9, label=lab)
-ax.plot([0, 100], [0, 100], color=MUTED, lw=0.8, ls="--")
-ax.set_xlim(0, 100); ax.set_ylim(0, 100); ax.set_aspect("equal")
-ax.set_xlabel("TIR, 30-day simulation (%)"); ax.set_ylabel("TIR, periodic orbit (%)"); ax.legend(loc="upper left", fontsize=7)
+    for f in POL:
+        k = j[np.isclose(j.policy, f)]
+        ax.scatter(k.TIR, k.TIR_per, s=20, marker=F_MK[f], color=F_COL[f], edgecolor=INK,
+                   linewidth=0.3, label=f"{int(round(f * 100))}% basal")
+    ax.plot([0, 100], [0, 100], color=MUTED, lw=0.8, ls="--")
+    ax.set_xlim(0, 100); ax.set_ylim(0, 100); ax.set_aspect("equal")
+    ax.set_title(lab, fontsize=9, color=INK); ax.set_xlabel("TIR, 30-day simulation (%)")
+axs[0].set_ylabel("TIR, periodic orbit (%)"); axs[0].legend(loc="upper left", fontsize=7)
 save(fig, "fig3_periodic_vs_simulation")
 
 # Figure 4: safe basal intervals (R4)

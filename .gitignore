@@ -4,3 +4,5 @@ __pycache__/
 # per-patient checkpoint parts (merged into the scan/switching CSVs)
 analysis/out/r4_parts/
 analysis/out/r5_parts/
+analysis/out/r7_parts/
+analysis/out/r8d_parts/
